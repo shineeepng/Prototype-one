@@ -4,8 +4,11 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] GameObject GameObject;
+    [SerializeField] GameObject Fireballtest;
+    [SerializeField] GameObject Aim;
 
     public float Angle = 0f;
+    public float sensitivity = 15;
 
 
 
@@ -18,6 +21,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Angle += Input.GetAxisRaw("Vertical") * Time.deltaTime;
+        Angle = Mathf.Clamp(Angle + Input.GetAxisRaw("Vertical") * sensitivity * Time.deltaTime, -45, 80);
+
+        GameObject.transform.rotation = Quaternion.Euler(0f, 0f, Angle);
+
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(Fireballtest, transform.position, Aim.transform.rotation);
+        }
+        
     }
 }
