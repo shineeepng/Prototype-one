@@ -33,10 +33,10 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 1
+    spriteMeshType: 0
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 16
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 639227313922796228
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -127,7 +127,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: DesertProps
+  - name: DesertProps1234
     originalName: 
     pivot: {x: 0.5, y: -0.03271028}
     alignment: 9
@@ -141,7 +141,27 @@ ScriptedImporter:
       height: 214
     spriteID: e51075961b7118f48b1cd709caddf2d7
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 89, y: 60}
+      - {x: 155, y: 60}
+      - {x: 155, y: 104}
+      - {x: 89, y: 104}
+    - outline:
+      - {x: 7, y: 66}
+      - {x: 70, y: 66}
+      - {x: 70, y: 105}
+      - {x: 7, y: 105}
+    - outline:
+      - {x: -45, y: 71}
+      - {x: -3, y: 71}
+      - {x: -3, y: 100}
+      - {x: -45, y: 100}
+    - outline:
+      - {x: -42, y: 8}
+      - {x: -2, y: 8}
+      - {x: -2, y: 57}
+      - {x: -42, y: 57}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -177,7 +197,43 @@ ScriptedImporter:
     tileSetIndex: 0
     parentIndex: -1
   tileSets: []
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
