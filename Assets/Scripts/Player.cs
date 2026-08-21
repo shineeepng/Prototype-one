@@ -1,20 +1,21 @@
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] GameObject GameObject;
-    [SerializeField] GameObject Fireballtest;
+    [SerializeField] GameObject FireballPrefab;
     [SerializeField] GameObject Aim;
+    [SerializeField] LineRenderer Trajectory;
+    [SerializeField] GameObject FireballSpawn;
+
 
     public float Angle = 0f;
     public float sensitivity = 15;
-    public float Power = 1f;
-    bool readyToShoot = false;
-    float speed = 50f;
+    public float Power = 20f;
+    bool readyAngle = false;
+    float speed = 20f;
     float direction;
-    float acceleration = 20f;
+    float acceleration = 15f;
 
 
 
@@ -28,46 +29,81 @@ public class Player : MonoBehaviour
     void Update()
     {
         
-        if (readyToShoot == false)
+        if (!readyAngle)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                readyToShoot = true;
+                readyAngle = true;
             }
             
             Angle = Mathf.Clamp(Angle + Input.GetAxisRaw("Vertical") * sensitivity * Time.deltaTime, -45, 80);
 
-            GameObject.transform.rotation = Quaternion.Euler(0f, 0f, Angle);
+            Aim.transform.rotation = Quaternion.Euler(0f, 0f, Angle);
         }
         
-        if (readyToShoot)
+        else if (readyAngle)
         {
-            Power += direction * speed * Time.deltaTime;
-            speed += acceleration * Time.deltaTime;
+            float maxPower = 50f;
+            float minPower = 4f;
 
-            if (Power >= 100f)
+            float t = (Power - minPower) / (maxPower - minPower);
+
+            // Make it slow at both ends and fast in the middle
+            float curve = Mathf.Sin(t * Mathf.PI);
+
+            speed = Mathf.Lerp(4f, 18f, curve);
+
+            Power += direction * speed * Time.deltaTime;
+
+            if (Power >= maxPower)
             {
-                Power = 100f;
+                Power = maxPower;
                 direction = -1f;
             }
 
-            if (Power <= 1f)
+            if (Power <= minPower)
             {
-                Power = 1f;
+                Power = minPower;
                 direction = 1f;
-                speed = 5f;
             }
+
+            DrawTrajectory();
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                readyToShoot = false;
-                Instantiate(Fireballtest, transform.position, Aim.transform.rotation);
-                Fireballtest.GetComponent<Fireball>();
+                readyAngle = false;
+                FireballPrefab.GetComponent<Fireball>().power = Power;
+                Instantiate(FireballPrefab, FireballSpawn.transform.position, Aim.transform.rotation);
+
             }
         }
 
         
 
         
+    }
+    void DrawTrajectory()
+    {
+        int points = 7;
+        float timeStep = 0.03f * (50f / Power);
+
+        Trajectory.positionCount = points;
+
+        Vector2 startPosition = FireballSpawn.transform.position;
+
+        Rigidbody2D fireballRb = FireballPrefab.GetComponent<Rigidbody2D>();
+
+        float mass = fireballRb.mass;
+
+        Vector2 startVelocity = (Vector2)Aim.transform.right * (Power / mass);
+
+        for (int i = 0; i < points; i++)
+        {
+            float time = i * timeStep;
+
+            Vector2 point = startPosition + startVelocity * time + 0.5f * Physics2D.gravity * time * time;
+
+            Trajectory.SetPosition(i, point);
+        }
     }
 }

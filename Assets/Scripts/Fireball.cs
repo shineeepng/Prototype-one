@@ -4,18 +4,31 @@ public class Fireball : MonoBehaviour
 {
 
     [SerializeField] GameObject Aim;
-    public float power = 20f;
+    [SerializeField] Transform visual;
+
+    public float power;
+    float basePower = 20f;
+    Rigidbody2D rb;
 
     void Start()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
-        rb.linearVelocity = transform.right * power;
+        rb.AddForce((Vector2)transform.right * power, ForceMode2D.Impulse);
     }
+
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rb.mass += 1f * Time.fixedDeltaTime;
+
+        if (rb.linearVelocity.sqrMagnitude > 0.01f)
+        {
+            float angle = Mathf.Atan2(rb.linearVelocity.y,rb.linearVelocity.x) * Mathf.Rad2Deg;
+
+            visual.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+        }
     }
+
 }
