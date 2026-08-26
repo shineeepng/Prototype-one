@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 readyAngle = true;
+                Trajectory.enabled = true;
             }
             
             Angle = Mathf.Clamp(Angle + Input.GetAxisRaw("Vertical") * sensitivity * Time.deltaTime, -45, 80);
@@ -43,15 +44,15 @@ public class Player : MonoBehaviour
         
         else if (readyAngle)
         {
-            float maxPower = 50f;
-            float minPower = 4f;
+            float maxPower = 100f;
+            float minPower = 1f;
 
             float t = (Power - minPower) / (maxPower - minPower);
 
             // Make it slow at both ends and fast in the middle
             float curve = Mathf.Sin(t * Mathf.PI);
 
-            speed = Mathf.Lerp(4f, 18f, curve);
+            speed = Mathf.Lerp(7f, 100f, curve);
 
             Power += direction * speed * Time.deltaTime;
 
@@ -74,6 +75,10 @@ public class Player : MonoBehaviour
                 readyAngle = false;
                 FireballPrefab.GetComponent<Fireball>().power = Power;
                 Instantiate(FireballPrefab, FireballSpawn.transform.position, Aim.transform.rotation);
+                Trajectory.enabled = false;
+
+                Power = 1f;
+                direction = 1f;
 
             }
         }
@@ -85,7 +90,7 @@ public class Player : MonoBehaviour
     void DrawTrajectory()
     {
         int points = 7;
-        float timeStep = 0.03f * (50f / Power);
+        float timeStep = 0.04f;
 
         Trajectory.positionCount = points;
 

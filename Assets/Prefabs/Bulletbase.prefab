@@ -46,7 +46,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.2
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
   Aim: {fileID: 0}
   visual: {fileID: 7977244384949264805}
-  power: 0
+  power: 89.01504
 --- !u!1 &6462524832008784610
 GameObject:
   m_ObjectHideFlags: 0

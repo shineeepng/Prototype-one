@@ -29,6 +29,12 @@ public class Fireball : MonoBehaviour
 
             visual.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
         }
+
+        if (transform.position.y < -100)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
 }
