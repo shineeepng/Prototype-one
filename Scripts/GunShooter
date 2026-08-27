@@ -1,0 +1,26 @@
+public class GunShooter : MonoBehaviour
+{
+    [SerializeField] private GunPowerUI powerSystem;
+    [SerializeField] private float shotPowerCost = 15f;
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (powerSystem.HasEnoughPower(shotPowerCost))
+            {
+                Shoot();
+                powerSystem.ModifyPower(-shotPowerCost); // Reduces power level
+            }
+            else
+            {
+                Debug.Log("Out of power!");
+            }
+        }
+    }
+
+    void Shoot()
+    {
+        // Your shooting physics logic here
+    }
+}

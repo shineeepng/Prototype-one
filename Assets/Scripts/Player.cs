@@ -36,12 +36,12 @@ public class Player : MonoBehaviour
                 readyAngle = true;
                 Trajectory.enabled = true;
             }
-
+            
             Angle = Mathf.Clamp(Angle + Input.GetAxisRaw("Vertical") * sensitivity * Time.deltaTime, -45, 80);
 
             Aim.transform.rotation = Quaternion.Euler(0f, 0f, Angle);
         }
-
+        
         else if (readyAngle)
         {
             float maxPower = 100f;
@@ -83,9 +83,9 @@ public class Player : MonoBehaviour
             }
         }
 
+        
 
-
-
+        
     }
     void DrawTrajectory()
     {
