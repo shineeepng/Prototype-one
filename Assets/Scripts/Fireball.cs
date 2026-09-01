@@ -27,7 +27,7 @@ public class Fireball : MonoBehaviour
         {
             float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
 
-            visual.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+            visual.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         if (transform.position.y < -100)
