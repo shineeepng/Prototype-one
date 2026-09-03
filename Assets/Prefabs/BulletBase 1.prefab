@@ -166,4 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
   Aim: {fileID: 0}
   visual: {fileID: 8645043140064446052}
-  power: 93.78819
+  power: 20

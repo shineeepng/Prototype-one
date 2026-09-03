@@ -2,34 +2,29 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform playerTarget; // Ссылка на трансформ игрока
-    [SerializeField] private float smoothSpeed = 5f;
-    [SerializeField] private Vector3 offset = new Vector3(0, 0, -10f);
+    public Transform defaultTarget;
+    public Vector3 offset = new Vector3(0f, 2f, -10f);
+    public float smoothSpeed = 8f;
 
     private Transform currentTarget;
 
     private void Start()
     {
-        // При старте следим за игроком
-        currentTarget = playerTarget;
+        currentTarget = defaultTarget;
     }
 
     private void LateUpdate()
     {
-        // Если цель была уничтожена (патрон сломался), возвращаемся к игроку
         if (currentTarget == null)
         {
-            currentTarget = playerTarget;
+            currentTarget = defaultTarget;
+            if (currentTarget == null) return;
         }
 
-        if (currentTarget != null)
-        {
-            Vector3 targetPosition = currentTarget.position + offset;
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothSpeed);
-        }
+        Vector3 desiredPosition = currentTarget.position + offset;
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
     }
 
-    // Вызываем этот метод при выстреле, чтобы переключить камеру на патрон
     public void SetTarget(Transform newTarget)
     {
         currentTarget = newTarget;
