@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
 
     [Header("UI")]
-    public Slider hpSlider; 
+    public Slider hpSlider;
 
     private void Start()
     {
@@ -15,34 +15,48 @@ public class PlayerHealth : MonoBehaviour
 
         if (hpSlider != null)
         {
+            hpSlider.minValue = 0f;
             hpSlider.maxValue = maxHealth;
             hpSlider.value = currentHealth;
         }
     }
 
-   
     public void TakeDamage(float damage)
     {
+        damage = Mathf.Abs(damage);
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-       
-        if (hpSlider != null)
-        {
-            hpSlider.value = currentHealth;
-        }
+        UpdateSlider();
 
-        
         if (currentHealth <= 0f)
         {
             Die();
         }
     }
 
+    public void Heal(float amount)
+    {
+        amount = Mathf.Abs(amount);
+
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        UpdateSlider();
+    }
+
+    private void UpdateSlider()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.value = currentHealth;
+        }
+    }
+
     private void Die()
     {
         Debug.Log("Pelaaja kuoli!");
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
     }
 }
-

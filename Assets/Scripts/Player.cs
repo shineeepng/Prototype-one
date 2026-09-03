@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
                 readyAngle = false;
                 FireballPrefab.GetComponent<Fireball>().power = Power;
                 Instantiate(FireballPrefab, FireballSpawn.transform.position, Aim.transform.rotation);
+                
                 Trajectory.enabled = false;
 
                 Power = 1f;
