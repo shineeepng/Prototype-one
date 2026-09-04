@@ -4,28 +4,35 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] GameObject FireballPrefab;
-    [SerializeField] GameObject Aim;
+    public GameObject Aim;
     [SerializeField] LineRenderer Trajectory;
     [SerializeField] GameObject FireballSpawn;
+    [SerializeField] GameManager GameManager;
+    [SerializeField] GameObject Gun;
 
 
     public float Angle = 0f;
     public float sensitivity = 15;
-    public float Power = 20f;
+    float Power = 1f;
     bool readyAngle = false;
     float speed = 20f;
-    float direction;
-    float acceleration = 15f;
+    float direction = 1f;
 
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
+
+        gameObject.tag = "Player";
+
+        Aim.transform.localPosition = Vector3.zero;
+        Gun.transform.localPosition = new Vector3 (0.4f, 0, 0);
         
+        if (!gameObject.GetComponent<Collider2D>())  
+        {
+            Debug.LogError("Player: Collider is missing!");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -80,6 +87,7 @@ public class Player : MonoBehaviour
                 Power = 1f;
                 direction = 1f;
 
+                GameManager.EndPlayerTurn();
             }
         }
 
